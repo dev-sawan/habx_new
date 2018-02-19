@@ -18,7 +18,7 @@ export class WpService {
     }
 
     getCurrentUserProfile() {
-        return this.authHttp.get(this.wpApiURL + '/users/me')
+        return this.authHttp.get(this.wpApiURL + '/users')
             .map(res => res.json());
     }
 
@@ -70,7 +70,7 @@ export class WpService {
 
     getPosts(paramsObj) {
         let params = this.util.transformRequest(paramsObj);
-        return this.http.get(this.wpApiURL + '/deal?_embed&' + params)
+        return this.authHttp.get(this.wpApiURL + '/posts?_embed&' + params)
             .map(res => res.json());
     }
 

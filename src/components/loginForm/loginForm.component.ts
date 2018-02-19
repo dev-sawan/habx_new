@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/index';
+import { NavController } from 'ionic-angular';
+import { Home } from '../../pages/home/home';
 
 @Component({
     selector: 'login-form',
@@ -11,7 +13,7 @@ export class LoginFormComponent {
     loginModel: any = {}
     isLoading: boolean = false;
 
-    constructor(private auth: AuthService) {
+    constructor(private auth: AuthService, public nav:NavController) {
     }
 
     login(e) {
@@ -22,11 +24,14 @@ export class LoginFormComponent {
                 result => {
                     if (result === true) {
                         // login successful
+                        
                         this.loginStatusMessage = 'Login successful!';
+                         this.nav.push(Home);
                     } else {
                         // login failed - token issue
                         this.loginStatusMessage = 'Something wrong with token.';
                     }
+                    
                     this.isLoading = false;
                 },
                 result => {

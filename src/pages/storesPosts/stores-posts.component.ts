@@ -11,7 +11,7 @@ import {PostDetail} from '../postDetail/post-detail.component';
 
 export class StoresPosts {
 
-    url: string = 'http://sumsy.com/wp-json/wp/v2/deal?_embed'
+    url: string = 'http://habx.in/wp-json/wp/v2'
     posts: any;
     selectedStore: any;
 

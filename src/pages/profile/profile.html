@@ -1,22 +1,18 @@
-<ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Profile</ion-title>
-  </ion-navbar>
-</ion-header>
+
 
 
 <ion-content padding>
   <div *ngIf="!auth.authenticated()">
     <login-form></login-form>
     <!--<signup-form></signup-form>-->
-    <p>Don't have an account yet? please go to <a href="http://sumsy.com/wp-login.php?action=register" target="_blank">Sumsy.com</a> to register.</p>
+    <p>Don't have an account yet? please go to <a href="https://www.habx.in/wp-login.php?action=register" target="_blank">Habx.in</a> to register.</p>
   </div>
 
   <div *ngIf="auth.authenticated()">
+    
     <ion-card>
+      <!-- <ion-header-bar>Your Profile Info</ion-header-bar> -->
+      <ion-title>Your Profile</ion-title>
 
     <ion-item *ngIf="auth.user">
       <p>you have logged in.</p>
@@ -27,6 +23,8 @@
   </ion-card>
 
   <button ion-button block (click)="logout()">Logout</button>
+  <button ion-button block (click)="home()">Home</button>
+
   </div>  
   
 </ion-content>

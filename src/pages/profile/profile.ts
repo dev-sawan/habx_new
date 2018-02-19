@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 
 import { AuthService, WpService } from '../../services/index';
+import { NavController } from 'ionic-angular';
+import { Home } from '../home/home';
 
 @Component({
     templateUrl: './profile.html',
@@ -10,6 +12,7 @@ export class ProfilePage {
 
     constructor(
         private auth: AuthService,
+        public nav :NavController,
         private wp: WpService) {
             console.log(this.auth.user);
     }
@@ -37,6 +40,10 @@ export class ProfilePage {
 
     logout() {
         this.auth.logout();
+    }
+
+    home(){
+        this.nav.push(Home)
     }
 
 }

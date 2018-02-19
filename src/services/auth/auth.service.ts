@@ -51,6 +51,9 @@ export class AuthService {
             })
             .catch((error:any) => {
             return Observable.throw(false)});
+
+                
+
     }
 
     public logout(): void {
@@ -59,6 +62,8 @@ export class AuthService {
         localStorage.removeItem('id_token');
         localStorage.removeItem('current_user');
     }
+
+    
 
 
 
