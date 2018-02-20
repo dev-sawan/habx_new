@@ -1,6 +1,8 @@
 {
   "name": "deals",
   "app_id": "02620f47",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "ionic-angular"
 }
