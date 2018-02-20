@@ -12,7 +12,7 @@ import { UtilService } from '../services/index';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = Home;
+  rootPage: any = ProfilePage;
 
   pages: Array<{title: string, component: any}>;
 

@@ -43,7 +43,7 @@ export class ProfilePage {
     }
 
     home(){
-        this.nav.push(Home)
+        this.nav.setRoot(Home);
     }
 
 }

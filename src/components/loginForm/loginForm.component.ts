@@ -26,7 +26,7 @@ export class LoginFormComponent {
                         // login successful
                         
                         this.loginStatusMessage = 'Login successful!';
-                         this.nav.push(Home);
+                         this.nav.setRoot(Home);
                     } else {
                         // login failed - token issue
                         this.loginStatusMessage = 'Something wrong with token.';
