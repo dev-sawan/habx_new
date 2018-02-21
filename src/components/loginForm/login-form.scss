@@ -1,11 +1,16 @@
 #logo{
-    padding: 5px;
-    margin-top: 100px;
-    background-color: black;
+
+   
+    background:color($colors,dark);
+
+    margin: 13px 20px 32px 5px;
    
 }
 
 #pagecolor{
-
-    background-color: black;
+padding: auto;
+margin: auto;
+scroll-behavior: auto;
+    background:color($colors,dark);
+    color:color($colors,light);
 }

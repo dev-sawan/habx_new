@@ -3,17 +3,21 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
+    
+  
     <ion-title>Home</ion-title>
+   
   </ion-navbar>
+  <ion-searchbar
+  [(ngModel)]="searchKeyword"
+  [showCancelButton]="shouldShowCancel"
+  (ionInput)="onCancel($event)"
+  (keyup.enter)="search(searchKeyword,$event)">
+</ion-searchbar>
 </ion-header>
 
 <ion-content >
-    <ion-searchbar
-    [(ngModel)]="searchKeyword"
-    [showCancelButton]="shouldShowCancel"
-    (ionInput)="onCancel($event)"
-    (keyup.enter)="search (searchKeyword,$event)">
-  </ion-searchbar>
+   
 
   <ion-card *ngFor="let post of posts"  no-padding>
     <ion-card-content >

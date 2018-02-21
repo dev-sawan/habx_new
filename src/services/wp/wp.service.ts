@@ -102,10 +102,10 @@ export class WpService {
         }
     }
 
-    // public searchKeyword(){
-
-
-    // }
+    public searchKeyword(Keyword, id){
+        return this.authHttp.get(this.wpApiURL+"posts?_embed&?filter[order]=DESC&filter[posts_per_page]=5&search=" + Keyword + "&page="+id
+    );
+}
 
 
 }

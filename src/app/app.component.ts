@@ -4,6 +4,7 @@ import { StatusBar, Splashscreen } from 'ionic-native';
 import { Home } from '../pages/home/home';
 import { ProfilePage } from '../pages/profile/profile';
 import { UtilService } from '../services/index';
+import { AboutPagePage } from '../pages/about/about';
 
 
 @Component({
@@ -22,15 +23,16 @@ export class MyApp {
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Home', component: Home},
-      { title: 'Profile', component: ProfilePage }
+      { title: 'Profile', component: ProfilePage },
+      {title:'Aboutus', component:AboutPagePage}
     ];
 
   }
 
   initializeApp() {
     this.platform.ready().then(() => {
-      //let toast = this.up.getToast("You are not connected to Internet.");
-      //toast.present();
+      let toast = this.up.getToast("You are not connected to Internet.");
+      toast.present();
 
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.

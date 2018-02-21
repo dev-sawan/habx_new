@@ -1,10 +1,12 @@
 
-<div padding id="logo">
+
+
+<ion-item padding id="logo">
   <img src="assets/icon/habx_logo.png"/>
-</div>
+</ion-item>
 
 <form name="loginForm" #loginForm="ngForm" novalidate >
-      <ion-list>
+    
         <ion-item>
           <ion-label floating>Username</ion-label>
           <ion-input
@@ -27,7 +29,7 @@
           >
           </ion-input>
         </ion-item>
-      </ion-list>
+    
 
       <ion-spinner name="bubbles" *ngIf="isLoading"></ion-spinner>
       <div *ngIf="!username.valid && (username.dirty || username.touched)" class="alert alert-danger padding">Username is required</div>
@@ -38,3 +40,4 @@
 
 
     </form>
+
