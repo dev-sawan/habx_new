@@ -5,6 +5,7 @@ import 'rxjs/add/operator/map';
 import { PostDetail } from '../postDetail/post-detail.component';
 import { StoresPosts } from '../storesPosts/stores-posts.component';
 import { WpService } from '../../services/index';
+import {UtilService} from '../../services/util/util.service'
 // import {AuthService} from '../../services/auth/auth.service'
 
 @Component({
@@ -13,7 +14,8 @@ import { WpService } from '../../services/index';
 })
 
 export class Home {
-    datas : any;
+    datas : any =[];
+    searchKeyword:string="";
     posts: any;
     loader: any;
     isLoading: boolean = false;
@@ -23,6 +25,7 @@ export class Home {
 
     constructor(
         public navCtrl: NavController,
+        private util:UtilService,
         private http: Http,
         private nav:NavController,
         private wp: WpService
@@ -62,14 +65,17 @@ export class Home {
         });
     }
 
-search(keyword){
-this.wp.searchKeyword(keyword,1).subscribe(data => { this.datas =data.json()
+search(Keyword){
+this.wp.searchKeyword(Keyword,1).subscribe(data => {datas => {
+    this.datas =datas;
+}
 });
 }
 
-onCancel(ev){
+onCancel(ev,paramsObj){
+    let params = this.util.transformRequest(paramsObj);
 if(!ev.targt.value){
-    this.wp.getPosts(1).subscribe(data =>{this.datas =data.json();
+    this.wp.getPosts(paramsObj).subscribe(data =>{this.datas =data.json();
     })
 }    
 }

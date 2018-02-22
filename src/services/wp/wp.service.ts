@@ -102,9 +102,9 @@ export class WpService {
         }
     }
 
-    public searchKeyword(Keyword, id){
-        return this.authHttp.get(this.wpApiURL+"posts?_embed&?filter[order]=DESC&filter[posts_per_page]=5&search=" + Keyword + "&page="+id
-    );
+    public searchKeyword(Keyword, paramsObj){
+        return this.authHttp.get(this.wpApiURL+"posts?_embed&?filter[order]=DESC&filter[posts_per_page]=5&search=" + Keyword + "&page="+paramsObj
+    ).map(data=>data.json());
 }
 
 
