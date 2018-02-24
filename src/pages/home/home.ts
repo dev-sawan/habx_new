@@ -7,7 +7,6 @@ import { StoresPosts } from '../storesPosts/stores-posts.component';
 import { WpService } from '../../services/index';
 import {UtilService} from '../../services/util/util.service'
 // import {AuthService} from '../../services/auth/auth.service'
-
 @Component({
     templateUrl: 'home.html',
     // providers: [AuthService]

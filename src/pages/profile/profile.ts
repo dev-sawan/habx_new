@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { AuthService, WpService } from '../../services/index';
 import { NavController } from 'ionic-angular';
 import { Home } from '../home/home';
+import {TabsPagePage} from '../tabs/tabs'
 
 @Component({
     templateUrl: './profile.html',

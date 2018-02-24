@@ -101,10 +101,23 @@ export class WpService {
             return null;
         }
     }
+    
+    searchKeyword(Keyword,paramsObj){
+    let params = this.util.transformRequest(paramsObj);
+    return this.http.get(this.wpApiURL+"?_embed&?filter[order]=DESC&filter[posts_per_page]=5&page="+params
+    ).map(res=>{
+        console.log(res);
+        res.json()});
+}
 
-    public searchKeyword(Keyword, paramsObj){
-        return this.authHttp.get(this.wpApiURL+"posts?_embed&?filter[order]=DESC&filter[posts_per_page]=5&search=" + Keyword + "&page="+paramsObj
-    ).map(data=>data.json());
+
+ getCategories() {
+    return this.http.get(this.wpApiURL+ '/categories?per_page=100')
+    .map(res => {
+        // console.log(res.json());
+        return res.json();
+        
+    });
 }
 
 

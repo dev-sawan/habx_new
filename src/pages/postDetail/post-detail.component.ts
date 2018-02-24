@@ -6,6 +6,7 @@ import {NavController, NavParams} from 'ionic-angular';
 })
 
 export class PostDetail {
+    category: any;
     selectedPost : any;
     isEditMode: boolean = false; 
 
@@ -16,6 +17,7 @@ export class PostDetail {
     }
 
     constructor(private nav: NavController, navParams: NavParams) {
+        this.category = navParams.get('category');
         this.selectedPost = navParams.get('post');
     }
 

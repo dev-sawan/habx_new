@@ -5,6 +5,8 @@ import { AuthConfig, AuthHttp } from 'angular2-jwt';
 import { Http } from '@angular/http';
 import { MyApp } from './app.component';
 import { Home } from '../pages/home/home';
+import {AboutPagePage} from '../pages/about/about';
+
 import { ProfilePage } from '../pages/profile/profile';
 import { PostDetail } from '../pages/postDetail/post-detail.component';
 import { StoresPosts } from '../pages/storesPosts/stores-posts.component';
@@ -13,6 +15,7 @@ import { LoginFormComponent } from '../components/loginForm/loginForm.component'
 import { CommentsListComponent } from '../components/commentsList/commentsList.component';
 import { CommentFormComponent } from '../components/commentForm/commentForm.component';
 import { SignupFormComponent } from '../components/signupForm/signupForm.component';
+import {Categories} from '../pages/categories/categories';
 
 export function getAuthHttp(http) {
   return new AuthHttp(new AuthConfig({
@@ -29,9 +32,14 @@ export function getAuthHttp(http) {
     StoresPosts,
     ProfilePage,
     LoginFormComponent,
+    Categories,
+    AboutPagePage,
+    // TabsPagePage,
+    // CategoriesPagePage,
     CommentsListComponent,
     CommentFormComponent,
     SignupFormComponent
+    
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -41,6 +49,8 @@ export function getAuthHttp(http) {
     MyApp,
     Home,
     PostDetail,
+    AboutPagePage,
+    Categories,
     StoresPosts,
     ProfilePage
   ],
