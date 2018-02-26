@@ -40,6 +40,7 @@ export class Categories {
 	}
 
 	loadCategory(params) {
+		
 		this.navController.push(Home,{
 			category:params
 		});

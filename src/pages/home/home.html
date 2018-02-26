@@ -9,10 +9,7 @@
    
   </ion-navbar>
   <ion-searchbar
-  [(ngModel)]="searchKeyword"
-  [showCancelButton]="shouldShowCancel"
-  (ionInput)="onCancel($event)"
-  (keyup.enter)="search(searchKeyword,$event)">
+  (ionInput)="getItems($event)">
 </ion-searchbar>
 </ion-header>
 
@@ -49,5 +46,95 @@
       loadingText="Loading more data...">
     </ion-infinite-scroll-content>
  </ion-infinite-scroll>
+<!-- 
+ <ion-navbar *navbar calm>
+  <ion-title>Corp Contacts</ion-title>
+  </ion-navbar>
+  
+  <ion-content padding class="corp-contacts">
+      <ion-searchbar [(ngModel)]="searchQuery" (input)="getItems($event)" (cancel)="onCancelSearchbar($event)" (clear)="onClearSearchbar($event)"></ion-searchbar>
+      <br>
+      <ion-list>
+          <ion-card *ngFor="#item of corp">
+              <ion-card-header>
+                  <b>{{ item.name}}</b><br>{{ item.position}}
+              </ion-card-header>
+  
+              <ion-card-content>
+                  <a href="tel:{{item.cell}}"><button large outline><ion-icon name="ios-phone-portrait"></ion-icon></button></a>
+  
+                  <a href="tel:{{item.phone}}"><button large outline><ion-icon name="ios-call"></ion-icon></button></a>
+  
+                  <a href="sms:{{item.sms}}"><button large outline><ion-icon name="ios-chatbubbles"></ion-icon></button></a>
+  
+                  <a href="mailto:{{item.email}}"><button large outline><ion-icon name="ios-mail"></ion-icon></button></a>
+              </ion-card-content>
+          </ion-card>
+      </ion-list>
+  </ion-content> -->
 
+
+  <!-- import {Page, NavController, Storage, SqlStorage} from 'ionic-angular';
+
+@Page({
+  templateUrl: 'build/pages/contactMain/corp-contacts/corp-contacts.html',
+})
+export class CorpContacts {
+    nav;
+    corp;
+    storage;
+    searchQuery;
+    corpResults;
+
+    constructor(nav: NavController) {
+        this.nav = nav;
+        this.storage = new Storage(SqlStorage, {name: 'app_data'});
+        this.getCorpContacts
+        this.corp = [];
+        this.searchQuery = '';
+        this.getCorpContacts();
+    }
+
+    getCorpContacts() {
+        this.storage.get("corpContact").then((value) => {
+        this.corpResults = JSON.parse(value);
+        this.corp = this.corpResults;
+        })
+    }
+
+    getCorp() {
+        this.corp = this.corpResults;
+    }
+
+    getItems(searchbar) {
+        this.getCorp();
+
+        var q = searchbar.value;
+
+        if (q.trim() == '') {
+            return;
+        }
+
+        this.corp = this.corp.filter((v) => {
+
+            if (v.name.toLowerCase().indexOf(q.toLowerCase()) > -1) {
+                return true;
+            }
+
+            return false;
+        })
+    }
+
+    onCancelSearchbar(searchbar) {
+        this.getCorp();
+    }
+
+    onClearSearchbar(searchbar) {
+        this.getCorp();
+    }
+} -->
+
+
+
+ 
 </ion-content>

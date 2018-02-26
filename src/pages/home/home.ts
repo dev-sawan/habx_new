@@ -13,8 +13,10 @@ import {UtilService} from '../../services/util/util.service'
 })
 
 export class Home {
-    datas : any =[];
-    searchKeyword:string="";
+    // datas : any =[];
+    // searchKeyword:string="";
+    searchQuery: string = '';
+    items:any;
     posts: any;
     loader: any;
     isLoading: boolean = false;
@@ -27,10 +29,13 @@ export class Home {
         private util:UtilService,
         private http: Http,
         private nav:NavController,
-        private wp: WpService
+        private wp: WpService,
+        
         // private auth :AuthService
     ) {
-
+        // this.searchKeyword= "";
+       console.log(this.searchQuery);
+        this.searchQuery = '';
         this.params['page'] = 1;
         this.isLoading = true;
 
@@ -63,21 +68,104 @@ export class Home {
             store: store
         });
     }
+   
 
-search(Keyword){
-this.wp.searchKeyword(Keyword,1).subscribe(data => {datas => {
-    this.datas =datas;
-}
-});
-}
+    initializeItems() {
+        this.items =this.posts;
+       
+      }
+    
+      getItems(ev: any) {
+        // Reset items back to all of the items
+        this.initializeItems();
+    
+        // set val to the value of the searchbar
+        let val = ev.target.value;
+    
+        // if the value is an empty string don't filter the items
+        if (val && val.trim() != '') {
+          this.items = this.items.filter((item) => {
+            return (item.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
+          })
+        }
+      }
 
-onCancel(ev,paramsObj){
-    let params = this.util.transformRequest(paramsObj);
-if(!ev.targt.value){
-    this.wp.getPosts(paramsObj).subscribe(data =>{this.datas =data.json();
-    })
-}    
-}
+
+    // getItems(ev: any) {
+       
+    //     let serVal = ev.target.value;
+    //     if (serVal && serVal.trim() != '') {
+    //       this.posts = this.posts.filter((post) => {
+    //         return (post.toLowerCase().indexOf(serVal.toLowerCase()) > -1);
+    //       })
+    //     }
+    //   }
+
+
+
+
+
+    // getItems(ev:any){
+    //    let serVal = ev.target.value;
+    //    if (serVal && serVal.trim()!=''){
+    //        this.posts = this.posts.filter((post)) => {
+    //            return ( posts.toLowerCase().indexOf(serVal.toLowerCase())> -1);
+    //        }
+           
+    //    }
+
+
+
+    // }
+
+
+    // getPosts() {
+    //     this.posts = this.postsResults;
+    // }
+
+    // getItems(searchbar) {
+    //     // Reset items back to all of the items
+    // this.getPosts();
+    //     // set q to the value of the searchbar
+    //     var q = searchbar.value;
+    //     // if the value is an empty string don't filter the items
+    //     if (q.trim() == '') {
+    //       return;
+    //     }
+      
+    //      this.posts = this.posts.filter((v) => {
+      
+    //       if (v.name.toLowerCase().indexOf(q.toLowerCase()) > -1) {
+    //          return true;
+    //         }
+      
+    //         return false;
+    //       })
+      
+    //    }
+    //    onCancelSearchbar(searchbar) {
+    //     this.getPosts();
+    // }
+
+    // onClearSearchbar(searchbar) {
+    //     this.posts();
+    // }
+
+// search(searchKeyword){
+// this.wp.searchKeyword(searchKeyword,1).subscribe(data => {datas => {
+//     console.log(datas)
+//     this.posts =data;
+// }
+// });
+// }
+
+// onCancel(ev,paramsObj){
+//     let params = this.util.transformRequest(paramsObj);
+// if(!ev.targt.value){
+//    return this.wp.getPosts(paramsObj).subscribe(data =>{this.datas =data.json();
+//     })
+// }    
+// }
 
     loadMore(infiniteScroll) {
         this.params['page'] = this.params['page'] + 1;
@@ -99,4 +187,51 @@ if(!ev.targt.value){
             );
     }
 
+//  ngOnInit() {
+//     this.getCustomers()
+//   }
+
+//   getCustomers() {
+//     let values = sessionStorage.getItem('url') + '/api/CustomerLocations?' + 'BusinessUnitId=' + this.BusinessUnitId;
+//     this.http.get(values).map(res => res.json()).subscribe(data => {
+      
+//       this.customers = data;
+//       console.log(data);
+
+//     }, (err) => {
+//       console.log(err);
+
+//     });
+
+//   }
+
+
+//   initializeItems() {
+//     this.customers;
+
+//   }
+//   initialize() {
+
+//     this.items = this.customers;
+//   }
+//   getItems(ev: any) {
+
+
+
+//     let val = ev.target.value;
+//     alert(val)
+//     if (ev.target.value === "" || val === undefined) {
+//       this.initialize();
+//     }
+
+//     if (val && val.trim() != '') {
+//       this.customers = this.customers.filter((item) => {
+
+
+//         return (item.CustomerName.toLowerCase().indexOf(val.toLowerCase()) > 1);
+//       })
+//     }
+//   }
+
+    
 }
