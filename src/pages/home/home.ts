@@ -6,6 +6,8 @@ import { PostDetail } from '../postDetail/post-detail.component';
 import { StoresPosts } from '../storesPosts/stores-posts.component';
 import { WpService } from '../../services/index';
 import {UtilService} from '../../services/util/util.service'
+import { ProfilePage } from '../profile/profile';
+import {AuthService} from '../../services/auth/auth.service';
 // import {AuthService} from '../../services/auth/auth.service'
 @Component({
     templateUrl: 'home.html',
@@ -19,6 +21,7 @@ export class Home {
     items:any;
     posts: any;
     loader: any;
+    isLoggedIn:boolean;
     isLoading: boolean = false;
     noMoreData: boolean = false;
     params = {
@@ -29,6 +32,7 @@ export class Home {
         private util:UtilService,
         private http: Http,
         private nav:NavController,
+        private auth:AuthService,
         private wp: WpService,
         
         // private auth :AuthService
@@ -44,6 +48,7 @@ export class Home {
                 data => {
                     this.posts = data;
                     this.isLoading = false;
+                    this.isLoggedIn=true;
                 },
                 error => {
                     this.isLoading = false;
@@ -233,5 +238,9 @@ export class Home {
 //     }
 //   }
 
+logOut(){
+    this.auth.logout();
+    this.nav.setRoot(ProfilePage);
+}
     
 }

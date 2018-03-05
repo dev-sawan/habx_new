@@ -51,8 +51,8 @@ export class MyApp {
     this.nav.push(page.component);
   }
  
-  logout() {
-    this.auth.logout();
-    this.nav.setRoot(ProfilePage);
-}
+//   logout() {
+//     this.auth.logout();
+//     this.nav.setRoot(ProfilePage);
+// }
 }
