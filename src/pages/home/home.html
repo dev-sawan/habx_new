@@ -16,23 +16,21 @@
  
 
   <ion-toolbar no-border-top>
-    <ion-searchbar placeholder="Filter Items" (ionInput)="filterItems($event)"></ion-searchbar>
+    <ion-searchbar [(ngModel)]="searchQuery" (input)="getItems($event)" (cancel)="onCancelSearchbar($event)" (clear)="onClearSearchbar($event)"></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
 <ion-content >
     <ion-card>
 
-        <ion-slides autoplay="3000" pager-input="true" pager no-padding class="banner">
-                <ion-slide>
-                  <img src="http://via.placeholder.com/350x150"/>
+        <ion-slides autoplay="3000"  [options]="{pager: true}" [options]="{loop: true}" pager class="banner">
+                <ion-slide  *ngFor="let number of [1,2,3,4]">
+                
+                  <img src="../assets/banner/{{number}}.jpg"/>
+                  <!-- <h2>India's First Hematology Blogging platform</h2> -->
+               
                 </ion-slide>
-                <ion-slide>
-                        <img src="http://via.placeholder.com/350x150"/>
-                </ion-slide>
-                <ion-slide>
-                        <img src="http://via.placeholder.com/350x150"/>
-                </ion-slide>
+            
               </ion-slides>
             </ion-card>
    
