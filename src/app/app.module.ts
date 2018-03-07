@@ -16,6 +16,7 @@ import { CommentsListComponent } from '../components/commentsList/commentsList.c
 import { CommentFormComponent } from '../components/commentForm/commentForm.component';
 import { SignupFormComponent } from '../components/signupForm/signupForm.component';
 import {Categories} from '../pages/categories/categories';
+import {TabsPagePage} from '../pages/tabs/tabs';
 
 export function getAuthHttp(http) {
   return new AuthHttp(new AuthConfig({
@@ -28,6 +29,7 @@ export function getAuthHttp(http) {
   declarations: [
     MyApp,
     Home,
+    TabsPagePage,
     PostDetail,
     StoresPosts,
     ProfilePage,
@@ -43,11 +45,13 @@ export function getAuthHttp(http) {
   ],
   imports: [
     IonicModule.forRoot(MyApp)
+    
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     Home,
+    TabsPagePage,
     PostDetail,
     AboutPagePage,
     Categories,

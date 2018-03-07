@@ -2,12 +2,14 @@ import { Component } from '@angular/core';
 import { Http } from '@angular/http';
 import { NavController } from 'ionic-angular';
 import 'rxjs/add/operator/map';
+import { FormControl } from '@angular/forms';
 import { PostDetail } from '../postDetail/post-detail.component';
 import { StoresPosts } from '../storesPosts/stores-posts.component';
 import { WpService } from '../../services/index';
 import {UtilService} from '../../services/util/util.service'
 import { ProfilePage } from '../profile/profile';
 import {AuthService} from '../../services/auth/auth.service';
+import 'rxjs/add/operator/debounceTime';
 // import {AuthService} from '../../services/auth/auth.service'
 @Component({
     templateUrl: 'home.html',
@@ -16,9 +18,11 @@ import {AuthService} from '../../services/auth/auth.service';
 
 export class Home {
     // datas : any =[];
-    // searchKeyword:string="";
-    searchQuery: string = '';
-    items:any;
+    searchKeyword:string="";
+    // searchQuery: string = '';
+    // searchTerm: string = '';
+    // searchControl: FormControl;
+    // items:any;
     posts: any;
     loader: any;
     isLoggedIn:boolean;
@@ -38,8 +42,9 @@ export class Home {
         // private auth :AuthService
     ) {
         // this.searchKeyword= "";
-       console.log(this.searchQuery);
-        this.searchQuery = '';
+        
+        // this.searchControl = new FormControl();
+        // this.searchQuery = '';
         this.params['page'] = 1;
         this.isLoading = true;
 
@@ -49,6 +54,7 @@ export class Home {
                     this.posts = data;
                     this.isLoading = false;
                     this.isLoggedIn=true;
+                    
                 },
                 error => {
                     this.isLoading = false;
@@ -57,15 +63,39 @@ export class Home {
             );
     }
 
-    ionViewDidEnter() {
+    ionViewDidLoad() {
+
+        // this.setFilteredItems();
+ 
+        // this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
+ 
+        //     this.setFilteredItems();
+ 
+        // });
 
     }
+    // setFilteredItems() {
+ 
+    //     this.posts = this.filterItems(this.searchTerm);
+ 
+    // }
 
     postTapped(event, post) {
         this.nav.push(PostDetail, {
             post: post
         });
     }
+    
+        onInput(ev:any){
+            console.log(this.searchKeyword)
+            let val = ev.target.value;
+            if(val && val.trim()!==''){
+        this.posts =this.posts.filter( function (post){
+        return post.toLowerCase().includes(val.toLowerCase());
+                });
+
+            }
+        }
 
     storeTapped(event, store) {
         console.log(store);
@@ -75,26 +105,34 @@ export class Home {
     }
    
 
-    initializeItems() {
-        this.items =this.posts;
+    // initializeItems() {
+    //     this.items =this.posts;
        
-      }
+    //   }
     
-      getItems(ev: any) {
-        // Reset items back to all of the items
-        this.initializeItems();
+    //   getItems(ev: any) {
+    //     // Reset items back to all of the items
+    //     this.initializeItems();
     
-        // set val to the value of the searchbar
-        let val = ev.target.value;
+    //     // set val to the value of the searchbar
+    //     let val = ev.target.value;
     
-        // if the value is an empty string don't filter the items
-        if (val && val.trim() != '') {
-          this.items = this.items.filter((item) => {
-            return (item.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
-          })
-        }
-      }
+    //     // if the value is an empty string don't filter the items
+    //     if (val && val.trim() != '') {
+    //       this.items = this.items.filter((item) => {
+    //         return (item.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
+    //       })
+    //     }
+    //   }
 
+
+    //   filterItems(searchTerm){
+ 
+    //     return this.posts.filter((post) => {
+    //         return post.title.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1;
+    //     });    
+ 
+    // }
 
     // getItems(ev: any) {
        

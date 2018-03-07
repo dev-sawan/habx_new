@@ -16,9 +16,16 @@
  
 
   <ion-toolbar no-border-top>
-    <ion-searchbar [(ngModel)]="searchQuery" (input)="getItems($event)" (cancel)="onCancelSearchbar($event)" (clear)="onClearSearchbar($event)"></ion-searchbar>
+    <ion-searchbar [(ngModel)]="searchKeyword"
+    [showCancelButton]="shouldShowCancel"
+    (ionInput)="onInput($event)"
+    (ionCancel)="onCancel($event)"
+    
+    ></ion-searchbar>
   </ion-toolbar>
 </ion-header>
+
+
 
 <ion-content >
     <ion-card>
@@ -26,7 +33,7 @@
         <ion-slides autoplay="3000"  [options]="{pager: true}" [options]="{loop: true}" pager class="banner">
                 <ion-slide  *ngFor="let number of [1,2,3,4]">
                 
-                  <img src="../assets/banner/{{number}}.jpg"/>
+                  <img src="assets/banner/{{number}}.jpg"/>
                   <!-- <h2>India's First Hematology Blogging platform</h2> -->
                
                 </ion-slide>

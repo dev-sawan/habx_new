@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import {Home} from '../../pages/home/home';
 // $TAB_IMPORTS
 
 /*
@@ -14,7 +15,7 @@ import { NavController } from 'ionic-angular';
 })
 export class TabsPagePage {
 
-  tab1Root = 'Tab1Page'
+  tab1Root = Home;
   tab2Root = 'Tab2Page'
   tab3Root = 'Tab3Page'
   tab4Root = 'Tab4Page'
