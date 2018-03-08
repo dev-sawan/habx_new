@@ -16,12 +16,7 @@
  
 
   <ion-toolbar no-border-top>
-    <ion-searchbar [(ngModel)]="searchKeyword"
-    [showCancelButton]="shouldShowCancel"
-    (ionInput)="onInput($event)"
-    (ionCancel)="onCancel($event)"
-    
-    ></ion-searchbar>
+    <ion-searchbar (ionInput)="getItems($event)" [debounce]="500" placeholder="Search"></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
@@ -42,22 +37,22 @@
             </ion-card>
    
 
-  <ion-card *ngFor="let post of posts"  no-padding>
+  <ion-card *ngFor="let item of items"  no-padding>
     <ion-card-content >
         
 
-      <ion-card-title  [innerHTML]="post.title.rendered" class="title"></ion-card-title>
+      <ion-card-title  [innerHTML]="item.title.rendered" class="title"></ion-card-title>
       <!-- <p [innerHTML]="post.excerpt.rendered"></p> -->
     </ion-card-content>
     
     <ion-row no-padding>
        <ion-col>
          <button ion-button clear small color="primary" icon-start>
-            {{post.date_gmt.split('T')[0]}}
+            {{item.date_gmt.split('T')[0]}}
          </button>
        </ion-col>
        <ion-col text-right>
-         <button ion-button small color="primary" (click)="postTapped($event, post)" icon-start>
+         <button ion-button small color="primary" (click)="postTapped($event, item)" icon-start>
             Read More
          </button>
        </ion-col>

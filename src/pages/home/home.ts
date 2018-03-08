@@ -18,12 +18,12 @@ import 'rxjs/add/operator/debounceTime';
 
 export class Home {
     // datas : any =[];
-    searchKeyword:string="";
+    // searchKeyword:string="";
     // searchQuery: string = '';
     // searchTerm: string = '';
     // searchControl: FormControl;
-    // items:any;
-    posts: any;
+    items:any;
+    posts:any;;
     loader: any;
     isLoggedIn:boolean;
     isLoading: boolean = false;
@@ -41,17 +41,17 @@ export class Home {
         
         // private auth :AuthService
     ) {
-        // this.searchKeyword= "";
-        
-        // this.searchControl = new FormControl();
-        // this.searchQuery = '';
+        this.initializeItems();
+
         this.params['page'] = 1;
         this.isLoading = true;
 
         this.wp.getPosts(this.params)
             .subscribe(
                 data => {
+                    
                     this.posts = data;
+                    this.items =this.posts;
                     this.isLoading = false;
                     this.isLoggedIn=true;
                     
@@ -65,20 +65,37 @@ export class Home {
 
     ionViewDidLoad() {
 
-        // this.setFilteredItems();
- 
-        // this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
- 
-        //     this.setFilteredItems();
- 
-        // });
 
     }
-    // setFilteredItems() {
- 
-    //     this.posts = this.filterItems(this.searchTerm);
- 
-    // }
+   
+    initializeItems() {
+        this.items = this.posts;
+      }
+
+      getItems(ev: any) {
+        // Reset items back to all of the items
+        this.initializeItems();
+    
+        // set val to the value of the searchbar
+        let val = ev.target.value;
+    
+        // if the value is an empty string don't filter the items
+        if (val && val.trim() != '') {
+          this.items = this.items.filter((item) => {
+            return (item.title.rendered.toLowerCase().indexOf(val.toLowerCase()) > -1);
+          })
+        }
+      }
+
+
+    // ngOnInit() {
+    //     this.setItems();
+    //   }
+    
+    //   setItems() {
+    //     this.posts = [];
+    //   }
+   
 
     postTapped(event, post) {
         this.nav.push(PostDetail, {
@@ -86,16 +103,7 @@ export class Home {
         });
     }
     
-        onInput(ev:any){
-            console.log(this.searchKeyword)
-            let val = ev.target.value;
-            if(val && val.trim()!==''){
-        this.posts =this.posts.filter( function (post){
-        return post.toLowerCase().includes(val.toLowerCase());
-                });
-
-            }
-        }
+       
 
     storeTapped(event, store) {
         console.log(store);
@@ -104,111 +112,17 @@ export class Home {
         });
     }
    
-
-    // initializeItems() {
-    //     this.items =this.posts;
-       
-    //   }
-    
-    //   getItems(ev: any) {
-    //     // Reset items back to all of the items
-    //     this.initializeItems();
-    
-    //     // set val to the value of the searchbar
+    // filterItems(ev: any) {
+    //     this.setItems();
     //     let val = ev.target.value;
     
-    //     // if the value is an empty string don't filter the items
-    //     if (val && val.trim() != '') {
-    //       this.items = this.items.filter((item) => {
-    //         return (item.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
-    //       })
+    //     if (val && val.trim() !== '') {
+    //       this.posts = this.posts.filter(function(post) {
+    //         return post.toLowerCase().includes(val.toLowerCase());
+    //       });
     //     }
     //   }
-
-
-    //   filterItems(searchTerm){
- 
-    //     return this.posts.filter((post) => {
-    //         return post.title.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1;
-    //     });    
- 
-    // }
-
-    // getItems(ev: any) {
-       
-    //     let serVal = ev.target.value;
-    //     if (serVal && serVal.trim() != '') {
-    //       this.posts = this.posts.filter((post) => {
-    //         return (post.toLowerCase().indexOf(serVal.toLowerCase()) > -1);
-    //       })
-    //     }
-    //   }
-
-
-
-
-
-    // getItems(ev:any){
-    //    let serVal = ev.target.value;
-    //    if (serVal && serVal.trim()!=''){
-    //        this.posts = this.posts.filter((post)) => {
-    //            return ( posts.toLowerCase().indexOf(serVal.toLowerCase())> -1);
-    //        }
-           
-    //    }
-
-
-
-    // }
-
-
-    // getPosts() {
-    //     this.posts = this.postsResults;
-    // }
-
-    // getItems(searchbar) {
-    //     // Reset items back to all of the items
-    // this.getPosts();
-    //     // set q to the value of the searchbar
-    //     var q = searchbar.value;
-    //     // if the value is an empty string don't filter the items
-    //     if (q.trim() == '') {
-    //       return;
-    //     }
-      
-    //      this.posts = this.posts.filter((v) => {
-      
-    //       if (v.name.toLowerCase().indexOf(q.toLowerCase()) > -1) {
-    //          return true;
-    //         }
-      
-    //         return false;
-    //       })
-      
-    //    }
-    //    onCancelSearchbar(searchbar) {
-    //     this.getPosts();
-    // }
-
-    // onClearSearchbar(searchbar) {
-    //     this.posts();
-    // }
-
-// search(searchKeyword){
-// this.wp.searchKeyword(searchKeyword,1).subscribe(data => {datas => {
-//     console.log(datas)
-//     this.posts =data;
-// }
-// });
-// }
-
-// onCancel(ev,paramsObj){
-//     let params = this.util.transformRequest(paramsObj);
-// if(!ev.targt.value){
-//    return this.wp.getPosts(paramsObj).subscribe(data =>{this.datas =data.json();
-//     })
-// }    
-// }
+   
 
     loadMore(infiniteScroll) {
         this.params['page'] = this.params['page'] + 1;
@@ -230,51 +144,6 @@ export class Home {
             );
     }
 
-//  ngOnInit() {
-//     this.getCustomers()
-//   }
-
-//   getCustomers() {
-//     let values = sessionStorage.getItem('url') + '/api/CustomerLocations?' + 'BusinessUnitId=' + this.BusinessUnitId;
-//     this.http.get(values).map(res => res.json()).subscribe(data => {
-      
-//       this.customers = data;
-//       console.log(data);
-
-//     }, (err) => {
-//       console.log(err);
-
-//     });
-
-//   }
-
-
-//   initializeItems() {
-//     this.customers;
-
-//   }
-//   initialize() {
-
-//     this.items = this.customers;
-//   }
-//   getItems(ev: any) {
-
-
-
-//     let val = ev.target.value;
-//     alert(val)
-//     if (ev.target.value === "" || val === undefined) {
-//       this.initialize();
-//     }
-
-//     if (val && val.trim() != '') {
-//       this.customers = this.customers.filter((item) => {
-
-
-//         return (item.CustomerName.toLowerCase().indexOf(val.toLowerCase()) > 1);
-//       })
-//     }
-//   }
 
 logOut(){
     this.auth.logout();
