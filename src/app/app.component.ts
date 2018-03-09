@@ -35,8 +35,8 @@ export class MyApp {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      let toast = this.up.getToast("You are not connected to Internet.");
-      toast.present();
+      // let toast = this.up.getToast("You are not connected to Internet.");
+      // toast.present();
 
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.

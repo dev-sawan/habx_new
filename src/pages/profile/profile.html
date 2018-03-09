@@ -15,7 +15,8 @@
       <ion-title>Your Profile</ion-title>
 
     <ion-item *ngIf="auth.user">
-      <p>you have logged in.</p>
+      
+      <p>you are logged in as.</p>
       <h2>{{ auth.user.user_display_name }}</h2>
       <p>{{ auth.user.user_email }}</p>
     </ion-item>

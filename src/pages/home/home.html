@@ -23,7 +23,7 @@
 
 
 <ion-content >
-    <ion-card>
+    <ion-card class="banner">
 
         <ion-slides autoplay="3000"  [options]="{pager: true}" [options]="{loop: true}" pager class="banner">
                 <ion-slide  *ngFor="let number of [1,2,3,4]">
@@ -39,10 +39,11 @@
 
   <ion-card *ngFor="let item of items"  no-padding>
     <ion-card-content >
-        
+           
 
       <ion-card-title  [innerHTML]="item.title.rendered" class="title"></ion-card-title>
-      <!-- <p [innerHTML]="post.excerpt.rendered"></p> -->
+     <ion-item text-wrap> <p  class="ellipsis"  [innerHTML]="item.excerpt.rendered"></p></ion-item>
+     
     </ion-card-content>
     
     <ion-row no-padding>
