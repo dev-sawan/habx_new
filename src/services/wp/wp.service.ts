@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { AuthHttp, JwtHelper } from 'angular2-jwt';
 import {SITE_URL, UtilService} from '../index';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/observable/forkJoin';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class WpService {
@@ -119,6 +122,22 @@ export class WpService {
         
     });
 }
+
+
+getPostCategories(post){
+    let observableBatch = [];
+
+    post.categories.forEach(category => {
+      observableBatch.push(this.getCategory(category));
+    });
+
+    return Observable.forkJoin(observableBatch);
+  }
+
+  getCategory(category){
+    return this.http.get(this.wpApiURL + "categories/" + category)
+    .map(res => res.json());
+  }
 
 
 }

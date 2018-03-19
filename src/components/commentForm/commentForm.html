@@ -1,8 +1,8 @@
 <form name="commentForm" #commentForm="ngForm" novalidate *ngIf="showPanel()">
       <div *ngIf="!commentText.valid && (commentText.dirty || commentText.touched)" class="alert alert-danger padding">comment is required</div>
 
-      <div class="padding">{{statusMessage}}</div>
-          <ion-textarea
+      <div class="padding" >{{statusMessage}}</div>
+          <ion-textarea style="text-align:center;"
             [(ngModel)]="comment.content.rendered"
             #commentText="ngModel"
             name="commentText"

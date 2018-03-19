@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Http } from '@angular/http';
-import { NavController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import 'rxjs/add/operator/map';
 import { FormControl } from '@angular/forms';
 import { PostDetail } from '../postDetail/post-detail.component';
@@ -17,17 +17,18 @@ import 'rxjs/add/operator/debounceTime';
 })
 
 export class Home {
-    // datas : any =[];
-    // searchKeyword:string="";
-    // searchQuery: string = '';
-    // searchTerm: string = '';
-    // searchControl: FormControl;
+   
     items:any;
     posts:any;;
     loader: any;
     isLoggedIn:boolean;
+    category: any;
+    id:number;
+    selectedPost : any;
     isLoading: boolean = false;
     noMoreData: boolean = false;
+    categoryId: number;
+    categoryTitle: string;
     params = {
     };
 
@@ -35,18 +36,25 @@ export class Home {
         public navCtrl: NavController,
         private util:UtilService,
         private http: Http,
+        private navParams:NavParams,
         private nav:NavController,
         private auth:AuthService,
         private wp: WpService,
         
         // private auth :AuthService
     ) {
+        // this.category = navParams.get('id');
+        // this.selectedPost = navParams.get('post');
         this.initializeItems();
 
         this.params['page'] = 1;
         this.isLoading = true;
 
-        this.wp.getPosts(this.params)
+
+        this.categoryId = this.navParams.get('id');
+        this.categoryTitle = this.navParams.get('title');
+
+        this.wp.getPosts(this.categoryId)
             .subscribe(
                 data => {
                     
@@ -70,6 +78,7 @@ export class Home {
    
     initializeItems() {
         this.items = this.posts;
+  
       }
 
       getItems(ev: any) {
@@ -78,24 +87,18 @@ export class Home {
     
         // set val to the value of the searchbar
         let val = ev.target.value;
+     
     
         // if the value is an empty string don't filter the items
         if (val && val.trim() != '') {
           this.items = this.items.filter((item) => {
-            return (item.excerpt.rendered.toLowerCase().indexOf(val.toLowerCase()) > -1);
+            return (item.content.rendered.toLowerCase().indexOf(val.toLowerCase())> -1);
+            // && (item.title.rendered.toLowerCase().indexOf(val.toLowerCase())> -1)
+            
           })
         }
       }
 
-
-    // ngOnInit() {
-    //     this.setItems();
-    //   }
-    
-    //   setItems() {
-    //     this.posts = [];
-    //   }
-   
 
     postTapped(event, post) {
         this.nav.push(PostDetail, {
@@ -103,7 +106,6 @@ export class Home {
         });
     }
     
-       
 
     storeTapped(event, store) {
         console.log(store);
@@ -112,23 +114,12 @@ export class Home {
         });
     }
    
-    // filterItems(ev: any) {
-    //     this.setItems();
-    //     let val = ev.target.value;
-    
-    //     if (val && val.trim() !== '') {
-    //       this.posts = this.posts.filter(function(post) {
-    //         return post.toLowerCase().includes(val.toLowerCase());
-    //       });
-    //     }
-    //   }
-   
 
     loadMore(infiniteScroll) {
-        this.params['page'] = this.params['page'] + 1;
-        console.log(this.params['page']);
+        // this.params['page'] = this.params['page'] + 1;
+        // console.log(this.params['page']);
 
-        this.wp.getPosts(this.params)
+        this.wp.getPosts(this.categoryId)
             .subscribe(
                 data => {
                     for(let i = 0; i< data.length; i++) {

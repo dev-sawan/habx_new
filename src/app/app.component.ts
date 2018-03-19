@@ -7,6 +7,7 @@ import { UtilService } from '../services/index';
 import { AboutPagePage } from '../pages/about/about';
 import {Categories} from '../pages/categories/categories';
 import {AuthService}from '../services/auth/auth.service';
+import { DocumentViewer } from '@ionic-native/document-viewer';
 
 
 
@@ -27,8 +28,9 @@ export class MyApp {
     this.pages = [
       { title: 'Home', component: Home},
       { title: 'Profile', component: ProfilePage },
-      {title:'Aboutus', component:AboutPagePage},
-      {title: 'Categories', component:Categories}
+      {title: 'Categories', component:Categories},
+      {title:'Aboutus', component:AboutPagePage}
+      
     ];
 
   }
@@ -55,4 +57,5 @@ export class MyApp {
 //     this.auth.logout();
 //     this.nav.setRoot(ProfilePage);
 // }
+
 }

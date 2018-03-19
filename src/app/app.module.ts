@@ -17,7 +17,7 @@ import { CommentFormComponent } from '../components/commentForm/commentForm.comp
 import { SignupFormComponent } from '../components/signupForm/signupForm.component';
 import {Categories} from '../pages/categories/categories';
 import {TabsPagePage} from '../pages/tabs/tabs';
-
+// import { DocumentViewer } from '@ionic-native/document-viewer';
 export function getAuthHttp(http) {
   return new AuthHttp(new AuthConfig({
     globalHeaders: [{ 'Accept': 'application/json' }],
@@ -33,6 +33,7 @@ export function getAuthHttp(http) {
     PostDetail,
     StoresPosts,
     ProfilePage,
+    // DocumentViewer,
     LoginFormComponent,
     Categories,
     AboutPagePage,
@@ -53,6 +54,7 @@ export function getAuthHttp(http) {
     Home,
     TabsPagePage,
     PostDetail,
+    // DocumentViewer,
     AboutPagePage,
     Categories,
     StoresPosts,

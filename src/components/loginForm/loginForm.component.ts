@@ -46,4 +46,11 @@ export class LoginFormComponent {
     logout() {
         this.auth.logout();
     }
+
+    // skipLogin(){
+    //     this.nav.push(Home);
+    //     this.loginStatusMessage= 'Please Login to check posts';
+    //     this.isLoading= true;
+   
+    // }
 }
